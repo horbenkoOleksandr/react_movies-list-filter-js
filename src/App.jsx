@@ -7,11 +7,11 @@ export const App = () => {
   const [query, setQuery] = useState('');
   const prepareQuery = query.trim().toLowerCase();
 
-  const visibleMovies = moviesFromServer.filter(
-    movie =>
-      movie.title.toLowerCase().includes(prepareQuery) ||
-      movie.description.toLowerCase().includes(prepareQuery),
-  );
+  const visibleMovies = moviesFromServer.filter(movie => {
+    const searchText = `${movie.title} ${movie.description}`.toLowerCase();
+
+    return searchText.includes(prepareQuery);
+  });
 
   return (
     <div className="page">
